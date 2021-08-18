@@ -10,12 +10,12 @@ class RemoteAuthentication {
   RemoteAuthentication({@required this.httpClient, @required this.url});
 
   Future<void> auth() async {
-    await httpClient.request(url: url);
+    await httpClient.request(url: url, method: 'post');
   }
 }
 
 abstract class HttpClient {
-  Future<void> request({@required String url});
+  Future<void> request({@required String url, @required String method});
 }
 
 class MockHttpClient extends Mock implements HttpClient {}
@@ -31,6 +31,6 @@ void main() {
     await sut.auth();
 
     // Assert
-    verify(httpClient.request(url: url));
+    verify(httpClient.request(url: url, method: 'post'));
   });
 }
