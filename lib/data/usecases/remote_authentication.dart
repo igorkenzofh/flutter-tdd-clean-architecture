@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
 
+import '../../domain/helpers/helpers.dart';
 import '../../domain/usecases/usecases.dart';
 
 import '../http/http.dart';
 
+// Regra de negocio, garantir a conversão de dados da api para domínio
 class RemoteAuthentication {
   final HttpClient httpClient;
   final String url;
@@ -11,10 +13,14 @@ class RemoteAuthentication {
   RemoteAuthentication({@required this.httpClient, @required this.url});
 
   Future<void> auth(AuthenticationParams params) async {
-    await httpClient.request(
-        url: url,
-        method: 'post',
-        body: RemoteAuthenticationParams.fromDomain(params).toJson());
+    try {
+      await httpClient.request(
+          url: url,
+          method: 'post',
+          body: RemoteAuthenticationParams.fromDomain(params).toJson());
+    } on HttpError {
+      throw DomainError.unexpected;
+    }
   }
 }
 
