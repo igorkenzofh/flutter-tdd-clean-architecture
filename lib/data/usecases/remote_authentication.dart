@@ -8,7 +8,7 @@ import '../models/models.dart';
 import '../http/http.dart';
 
 // Regra de negocio, garantir a conversão de dados da api para domínio
-class RemoteAuthentication {
+class RemoteAuthentication implements Authentication {
   final HttpClient httpClient;
   final String url;
 
