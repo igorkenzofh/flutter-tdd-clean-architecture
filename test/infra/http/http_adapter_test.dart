@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:faker/faker.dart';
 import 'package:flutter/foundation.dart';
@@ -18,7 +19,8 @@ class HttpAdapter {
       'content-type': 'application/json',
       'accept': 'application/json'
     };
-    await client.post(Uri.parse(url), headers: headers, body: jsonEncode(body));
+    final jsonBody = body != null ? jsonEncode(body) : null;
+    await client.post(Uri.parse(url), headers: headers, body: jsonBody);
   }
 }
 
@@ -47,6 +49,14 @@ void main() {
               'accept': 'application/json'
             },
             body: '{"any_key":"any_value"}'),
+      );
+    });
+
+    test('should call post without body', () async {
+      await sut.request(url: url, method: 'post');
+
+      verify(
+        client.post(any, headers: anyNamed('headers')),
       );
     });
   });
