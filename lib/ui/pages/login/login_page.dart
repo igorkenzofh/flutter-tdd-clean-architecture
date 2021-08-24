@@ -33,7 +33,10 @@ class LoginPage extends StatelessWidget {
                                   Icons.email,
                                   color: Theme.of(context).primaryColorLight,
                                 ),
-                                errorText: snapshot.data),
+                                // só vai ser nulo se snapshot.data for diferente de nulo e isEmpty for true
+                                errorText: snapshot.data?.isEmpty == true
+                                    ? null
+                                    : snapshot.data),
                             keyboardType: TextInputType.emailAddress,
                             onChanged: presenter.validateEmail,
                           );
