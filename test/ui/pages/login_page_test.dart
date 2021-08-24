@@ -145,7 +145,7 @@ void main() {
     expect(passwordTextChildren, findsOneWidget);
   });
 
-  testWidgets('should enable button if form is valid',
+  testWidgets('should enable logunbutton if form is valid',
       (WidgetTester tester) async {
     await loadPage(tester);
 
@@ -154,5 +154,16 @@ void main() {
 
     final button = tester.widget<TextButton>(find.byType(TextButton));
     expect(button.onPressed, isNotNull);
+  });
+
+  testWidgets('should disable loginbutton if form is invalid',
+      (WidgetTester tester) async {
+    await loadPage(tester);
+
+    isFormValidController.add(false);
+    await tester.pump();
+
+    final button = tester.widget<TextButton>(find.byType(TextButton));
+    expect(button.onPressed, null);
   });
 }
