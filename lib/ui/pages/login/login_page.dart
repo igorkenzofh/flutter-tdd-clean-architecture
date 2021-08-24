@@ -85,8 +85,9 @@ class LoginPage extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 16.0, vertical: 2),
                                   ),
-                                  onPressed:
-                                      snapshot.data == true ? () {} : null,
+                                  onPressed: snapshot.data == true
+                                      ? presenter.auth
+                                      : null,
                                   child: Text('Entrar',
                                       style: TextStyle(
                                           fontSize: 20, color: Colors.white)),
