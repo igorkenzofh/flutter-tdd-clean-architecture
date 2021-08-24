@@ -77,16 +77,21 @@ class LoginPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                          TextButton(
-                            style: TextButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16.0, vertical: 2),
-                            ),
-                            onPressed: null,
-                            child: Text('Entrar',
-                                style: TextStyle(
-                                    fontSize: 20, color: Colors.white)),
-                          ),
+                          StreamBuilder<bool>(
+                              stream: presenter.isFormValidStream,
+                              builder: (context, snapshot) {
+                                return TextButton(
+                                  style: TextButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16.0, vertical: 2),
+                                  ),
+                                  onPressed:
+                                      snapshot.data == true ? () {} : null,
+                                  child: Text('Entrar',
+                                      style: TextStyle(
+                                          fontSize: 20, color: Colors.white)),
+                                );
+                              }),
                         ],
                       ),
                     ),
