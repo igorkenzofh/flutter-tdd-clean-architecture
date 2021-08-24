@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tdd_clean_arch_app/ui/pages/login/components/components.dart';
 import 'package:flutter_tdd_clean_arch_app/ui/pages/pages.dart';
 import 'package:provider/provider.dart';
 import '../../components/components.dart';
@@ -59,43 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                           padding: const EdgeInsets.only(top: 8.0, bottom: 32),
                           child: PasswordInput(),
                         ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Stack(
-                            children: [
-                              Positioned.fill(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                        begin: Alignment.topRight,
-                                        end: Alignment.bottomLeft,
-                                        colors: [
-                                          Theme.of(context).primaryColorLight,
-                                          Theme.of(context).primaryColorDark
-                                        ]),
-                                  ),
-                                ),
-                              ),
-                              StreamBuilder<bool>(
-                                  stream: widget.presenter.isFormValidStream,
-                                  builder: (context, snapshot) {
-                                    return TextButton(
-                                      style: TextButton.styleFrom(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 16.0, vertical: 2),
-                                      ),
-                                      onPressed: snapshot.data == true
-                                          ? widget.presenter.auth
-                                          : null,
-                                      child: Text('Entrar',
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              color: Colors.white)),
-                                    );
-                                  }),
-                            ],
-                          ),
-                        ),
+                        LoginButton(),
                         TextButton.icon(
                             onPressed: () {},
                             icon: Icon(Icons.person,
