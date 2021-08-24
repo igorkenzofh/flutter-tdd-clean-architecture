@@ -3,6 +3,7 @@ import 'package:flutter_tdd_clean_arch_app/ui/pages/pages.dart';
 import 'package:provider/provider.dart';
 import '../../components/components.dart';
 import 'components/email_input.dart';
+import 'components/password_input.dart';
 
 class LoginPage extends StatefulWidget {
   final LoginPresenter presenter;
@@ -56,22 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                         EmailInput(),
                         Padding(
                           padding: const EdgeInsets.only(top: 8.0, bottom: 32),
-                          child: StreamBuilder<String>(
-                              stream: widget.presenter.passwordErrorStream,
-                              builder: (context, snapshot) {
-                                return TextFormField(
-                                  decoration: InputDecoration(
-                                      labelText: 'Senha',
-                                      icon: Icon(Icons.lock,
-                                          color: Theme.of(context)
-                                              .primaryColorLight),
-                                      errorText: snapshot.data?.isEmpty == true
-                                          ? null
-                                          : snapshot.data),
-                                  obscureText: true,
-                                  onChanged: widget.presenter.validatePassword,
-                                );
-                              }),
+                          child: PasswordInput(),
                         ),
                         ClipRRect(
                           borderRadius: BorderRadius.circular(20),
