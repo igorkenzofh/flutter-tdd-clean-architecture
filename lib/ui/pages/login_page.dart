@@ -61,7 +61,7 @@ class LoginPage extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 16.0, vertical: 2),
                             ),
-                            onPressed: () {},
+                            onPressed: null,
                             child: Text('Entrar',
                                 style: TextStyle(
                                     fontSize: 20, color: Colors.white)),
