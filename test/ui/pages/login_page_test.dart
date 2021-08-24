@@ -62,6 +62,7 @@ void main() {
 
     final button = tester.widget<TextButton>(find.byType(TextButton));
     expect(button.onPressed, null);
+    expect(find.byType(CircularProgressIndicator), findsNothing);
   });
 
   testWidgets(
@@ -191,5 +192,18 @@ void main() {
     await tester.pump();
 
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
+  });
+
+  testWidgets('should hide loading', (WidgetTester tester) async {
+    await loadPage(tester);
+
+    // mostra o loading
+    isLoadingController.add(true);
+    await tester.pump();
+    // esconde
+    isLoadingController.add(false);
+    await tester.pump();
+
+    expect(find.byType(CircularProgressIndicator), findsNothing);
   });
 }
